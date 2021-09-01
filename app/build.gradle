@@ -15,7 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_BASE_URL", '"https://TODO"')
+        buildConfigField("String", "SERVICE_BASE_URL", '"https://android-interview.s3.eu-west-2.amazonaws.com"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

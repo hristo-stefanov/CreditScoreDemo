@@ -2,11 +2,15 @@ package hristostefanov.creditscoredemo.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hristostefanov.creditscoredemo.BuildConfig
+import hristostefanov.creditscoredemo.business.Repository
+import hristostefanov.creditscoredemo.data.RepositoryImpl
+import hristostefanov.creditscoredemo.data.Service
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -26,5 +30,10 @@ abstract class AppModule {
                 .build()
         }
 
+        @Provides
+        fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
     }
+
+    @Binds
+    abstract fun bindRepository(impl: RepositoryImpl): Repository
 }

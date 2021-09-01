@@ -1,0 +1,77 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  # NOTE: "each job in a workflow runs in a fresh virtual environment"
+  verify_branch_job:
+    name: Verify Branch
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Cache Gradle packages
+      # NOTE: "Jobs on GitHub-hosted runners start in a clean virtual environment and must download
+      # dependencies each time, causing increased network utilization, longer runtime, and increased
+      # cost. To help speed up the time it takes to recreate these files, GitHub can cache dependencies
+      # you frequently use in workflows."
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build APK
+      # Make sure the branch code can produce final deliverables (APKs) by merging manifest files,
+      # other resources etc.
+      run: bash ./gradlew assemble
+
+    - name: Run tests (unit tests + Espresso tests on Robolectric)
+      # NOTE: because of the fragment-testing library, only the debug build type
+      # can be used. Other build types fail to build with the test source set.
+      # see app/build.gradle
+      run: bash ./gradlew testDebug --stacktrace
+
+    - name: Upload Test Reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test reports
+        path: app/build/reports/tests/
+
+    - name: Cleanup Gradle Cache
+      # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+      # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+      run: |
+        rm -f ~/.gradle/caches/modules-2/modules-2.lock
+        rm -f ~/.gradle/caches/modules-2/gc.properties
+
+# Related Tasks
+# * Creating a status badge - Select the workflow from Actions > All Workflows and
+#  click ... on the right, select specific branch or default branch
+
+# Consider
+# https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge
+
+# References
+# https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions
+# https://docs.github.com/en/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+# https://github.com/marketplace?type=actions
+# https://docs.github.com/en/actions/managing-workflow-runs/adding-a-workflow-status-badge
+# https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
+#
+# https://developer.android.com/studio/build/building-cmdline

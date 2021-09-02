@@ -1,6 +1,7 @@
 package hristostefanov.creditscoredemo.data
 
 import androidx.annotation.AnyThread
+import hristostefanov.creditscoredemo.data.models.Response
 import retrofit2.HttpException
 import retrofit2.http.GET
 

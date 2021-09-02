@@ -1,5 +1,5 @@
 package hristostefanov.creditscoredemo.business
 
 interface ReportCreditScoreProgressInteractor {
-    operator fun invoke(): CreditScoreProgress
+    suspend operator fun invoke(): CreditScoreProgress
 }

@@ -4,9 +4,16 @@ import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepositor
 import javax.inject.Inject
 
 class ReportCreditScoreProgressInteractorImpl @Inject constructor(
-    creditScoreRepository: CreditScoreRepository
+    private val creditScoreRepository: CreditScoreRepository
 ) : ReportCreditScoreProgressInteractor {
-    override fun invoke(): CreditScoreProgress {
-        TODO("Not yet implemented")
+    override suspend operator fun invoke(): CreditScoreProgress {
+        val creditScore = creditScoreRepository.findCreditScore()
+        val progress = creditScore.score.toFloat() / (creditScore.maxScore - creditScore.minScore)
+        return CreditScoreProgress(
+            progress = progress,
+            score = creditScore.score,
+            minScore = creditScore.minScore,
+            maxScore = creditScore.maxScore
+        )
     }
 }

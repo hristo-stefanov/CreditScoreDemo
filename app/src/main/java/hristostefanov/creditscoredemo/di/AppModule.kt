@@ -8,8 +8,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hristostefanov.creditscoredemo.BuildConfig
-import hristostefanov.creditscoredemo.business.Repository
-import hristostefanov.creditscoredemo.data.RepositoryImpl
+import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
+import hristostefanov.creditscoredemo.data.CreditScoreRepositoryImpl
 import hristostefanov.creditscoredemo.data.Service
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -35,5 +35,5 @@ abstract class AppModule {
     }
 
     @Binds
-    abstract fun bindRepository(impl: RepositoryImpl): Repository
+    abstract fun bindCreditScore(impl: CreditScoreRepositoryImpl): CreditScoreRepository
 }

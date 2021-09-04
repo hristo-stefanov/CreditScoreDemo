@@ -8,6 +8,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hristostefanov.creditscoredemo.BuildConfig
+import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
+import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
 import hristostefanov.creditscoredemo.data.CreditScoreRepositoryImpl
 import hristostefanov.creditscoredemo.data.Service
@@ -35,5 +37,9 @@ abstract class AppModule {
     }
 
     @Binds
-    abstract fun bindCreditScore(impl: CreditScoreRepositoryImpl): CreditScoreRepository
+    abstract fun bindCreditScoreRepository(impl: CreditScoreRepositoryImpl): CreditScoreRepository
+
+    @Binds
+    abstract fun bindReportCreditScoreProgressInteractor(impl: ReportCreditScoreProgressInteractorImpl)
+            : ReportCreditScoreProgressInteractor
 }

@@ -18,10 +18,10 @@ import org.mockito.junit.MockitoJUnit
 class MainViewModelTest() {
 
     @get:Rule
-    val mockitoRule = MockitoJUnit.rule()
+    internal val mockitoRule = MockitoJUnit.rule()
 
     @get:Rule
-    val coroutinesTestRule = CoroutinesTestRule()
+    internal val coroutinesRule = CoroutinesTestRule()
 
     @Mock
     private lateinit var creditScoreRepository: CreditScoreRepository
@@ -31,7 +31,7 @@ class MainViewModelTest() {
     }
 
     @Test
-    fun getViewState() = coroutinesTestRule.testDispatcher.runBlockingTest {
+    fun getViewState() = coroutinesRule.testDispatcher.runBlockingTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore("user123", 200, 100, 500, 3, 5)
         )

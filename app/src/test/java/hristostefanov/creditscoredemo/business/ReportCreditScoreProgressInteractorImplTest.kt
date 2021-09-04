@@ -1,15 +1,25 @@
 package hristostefanov.creditscoredemo.business
 
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
-import hristostefanov.creditscoredemo.util.BaseTestCase
+import hristostefanov.creditscoredemo.util.CoroutinesTestRule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Rule
 import org.junit.Test
-import org.mockito.BDDMockito
 import org.mockito.BDDMockito.given
+import org.mockito.BDDMockito.then
 import org.mockito.Mock
+import org.mockito.junit.MockitoJUnit
 
-class ReportCreditScoreProgressInteractorImplTest : BaseTestCase() {
+@ExperimentalCoroutinesApi
+class ReportCreditScoreProgressInteractorImplTest {
+
+    @get:Rule
+    internal val mockitorRule = MockitoJUnit.rule()
+
+    @get:Rule
+    internal val coroutinesRule = CoroutinesTestRule()
 
     @Mock
     private lateinit var creditScoreRepository: CreditScoreRepository
@@ -19,7 +29,7 @@ class ReportCreditScoreProgressInteractorImplTest : BaseTestCase() {
     }
 
     @Test
-    operator fun invoke() = runBlockingTest {
+    operator fun invoke() = coroutinesRule.testDispatcher.runBlockingTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -33,8 +43,10 @@ class ReportCreditScoreProgressInteractorImplTest : BaseTestCase() {
 
         val result = interactorUnderTest()
 
-        Assertions.assertThat(result).matches {
+        assertThat(result).matches {
             it.progress == 0.5f && it.minScore == 100 && it.maxScore == 500
         }
+        then(creditScoreRepository).should().findCreditScore()
+        then(creditScoreRepository).shouldHaveNoMoreInteractions()
     }
 }

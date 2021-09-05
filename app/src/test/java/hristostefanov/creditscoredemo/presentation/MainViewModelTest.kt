@@ -1,11 +1,11 @@
 package hristostefanov.creditscoredemo.presentation
 
 import hristostefanov.creditscoredemo.R
-import hristostefanov.creditscoredemo.util.StringSupplier
 import hristostefanov.creditscoredemo.business.CreditScoreProgress
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
+import hristostefanov.creditscoredemo.util.StringSupplier
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -62,8 +62,6 @@ class MainViewModelTest {
         assertThat(viewModelUnderTest.viewState.value).matches {
             it is MainViewState.Success && it.caption == "out of 500" && it.scoreText == "200"
         }
-        then(reportCreditScoreProgressInteractor).should().invoke()
-        then(reportCreditScoreProgressInteractor).shouldHaveNoMoreInteractions()
     }
 
     @Test
@@ -75,6 +73,16 @@ class MainViewModelTest {
         assertThat(result).matches {
             it is MainViewState.Failure && it.message == "failure"
         }
+    }
+
+    @Test
+    fun interactions() = coroutinesRule.testDispatcher.runBlockingTest {
+        given(reportCreditScoreProgressInteractor()).willReturn(
+            CreditScoreProgress(0.5f, 200, 500, 100)
+        )
+
+        viewModelUnderTest
+
         then(reportCreditScoreProgressInteractor).should().invoke()
         then(reportCreditScoreProgressInteractor).shouldHaveNoMoreInteractions()
     }

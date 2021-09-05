@@ -3,10 +3,7 @@ package hristostefanov.creditscoredemo.ui
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,8 +11,8 @@ import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
@@ -32,13 +29,44 @@ private val MARGIN_INSIDE_PROGRESS_INDICATOR = 16.dp
 private val MARGIN_INSIDE_BORDER = 4.dp
 
 @Composable
-fun MainScreen(viewState: MainViewState) {
+fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
     Scaffold {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CreditScoreWidget(viewState)
+            when (viewState) {
+                is MainViewState.Success -> {
+                    CreditScoreWidget(viewState)
+                }
+                is MainViewState.Failure -> {
+                    Failure(viewState.message, onRetry)
+                }
+                is MainViewState.Loading -> {
+                    Loading()
+                }
+                else -> Unit
+            }
+        }
+    }
+}
+
+@Composable
+fun Loading() {
+    CircularProgressIndicator()
+}
+
+@Composable
+fun Failure(message: String, onRetry: () -> Unit) {
+    Column(
+        Modifier
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(message, textAlign = TextAlign.Center, color = MaterialTheme.colors.error)
+        Spacer(Modifier.size(16.dp))
+        Button(onClick = onRetry) {
+            Text("Retry")
         }
     }
 }
@@ -64,7 +92,7 @@ val circleFitContentLayout =
 
 
 @Composable
-fun CreditScoreWidget(viewState: MainViewState) {
+fun CreditScoreWidget(viewState: MainViewState.Success) {
     Box(
         modifier = Modifier
             .wrapContentSize()
@@ -103,14 +131,22 @@ fun CreditScoreWidget(viewState: MainViewState) {
 
 @Preview
 @Composable
+fun PreviewLoading() {
+    CreditScoreDemoTheme {
+        Loading()
+    }
+}
+
+@Preview
+@Composable
 fun Preview() {
     CreditScoreDemoTheme {
         MainScreen(
-            viewState = MainViewState(
+            viewState = MainViewState.Success(
                 scoreText = "327",
                 caption = "out of 700",
                 progress = 0.5f
-            )
+            ), {}
         )
     }
 }

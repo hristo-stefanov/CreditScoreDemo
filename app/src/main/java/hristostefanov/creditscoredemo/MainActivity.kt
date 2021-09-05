@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
             val viewState by viewModel.viewState.collectAsState()
 
             CreditScoreDemoTheme {
-                MainScreen(viewState)
+                MainScreen(viewState, { viewModel.onRetry() })
             }
         }
     }

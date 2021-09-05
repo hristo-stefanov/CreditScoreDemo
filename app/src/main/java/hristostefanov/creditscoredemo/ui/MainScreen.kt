@@ -11,11 +11,13 @@ import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import hristostefanov.creditscoredemo.R
 import hristostefanov.creditscoredemo.presentation.MainViewState
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 import kotlin.math.ceil
@@ -66,7 +68,7 @@ fun Failure(message: String, onRetry: () -> Unit) {
         Text(message, textAlign = TextAlign.Center, color = MaterialTheme.colors.error)
         Spacer(Modifier.size(16.dp))
         Button(onClick = onRetry) {
-            Text("Retry")
+            Text(stringResource(R.string.retry))
         }
     }
 }
@@ -112,7 +114,7 @@ fun CreditScoreWidget(viewState: MainViewState.Success) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "Your credit score is",
+                stringResource(R.string.yourCreditScoreIs),
                 style = MaterialTheme.typography.subtitle2
             )
             Text(

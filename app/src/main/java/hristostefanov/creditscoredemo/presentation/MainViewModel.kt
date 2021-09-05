@@ -3,6 +3,8 @@ package hristostefanov.creditscoredemo.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hristostefanov.creditscoredemo.R
+import hristostefanov.creditscoredemo.StringSupplier
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +13,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor) :
+class MainViewModel @Inject constructor(
+    private val reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor,
+    private val stringSupplier: StringSupplier
+) :
     ViewModel() {
     private val _viewState = MutableStateFlow<MainViewState>(MainViewState.Loading)
     val viewState: StateFlow<MainViewState> = _viewState
@@ -26,7 +31,7 @@ class MainViewModel @Inject constructor(private val reportCreditScoreProgressInt
             try {
                 val creditScoreProcess = reportCreditScoreProgressInteractor()
                 val scoreText = creditScoreProcess.score.toString()
-                val caption = "out of ${creditScoreProcess.maxScore}"
+                val caption = stringSupplier.getString(R.string.outOf, creditScoreProcess.maxScore)
                 _viewState.value = MainViewState.Success(
                     scoreText = scoreText,
                     caption = caption,

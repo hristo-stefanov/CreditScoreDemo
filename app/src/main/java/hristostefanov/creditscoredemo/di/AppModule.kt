@@ -1,5 +1,6 @@
 package hristostefanov.creditscoredemo.di
 
+import android.app.Application
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
@@ -8,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hristostefanov.creditscoredemo.BuildConfig
+import hristostefanov.creditscoredemo.StringSupplier
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
@@ -34,6 +36,13 @@ abstract class AppModule {
 
         @Provides
         fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
+
+        @Provides
+        fun provideStringSupplier(application: Application): StringSupplier {
+            return object : StringSupplier {
+                override fun getString(resId: Int, vararg formatArgs: Any) = application.getString(resId, * formatArgs)
+            }
+        }
     }
 
     @Binds

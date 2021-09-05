@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import dagger.hilt.android.AndroidEntryPoint
 import hristostefanov.creditscoredemo.presentation.MainViewModel
-import hristostefanov.creditscoredemo.ui.MainScreen
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @AndroidEntryPoint
@@ -20,7 +19,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-
             val viewState by viewModel.viewState.collectAsState()
 
             CreditScoreDemoTheme {

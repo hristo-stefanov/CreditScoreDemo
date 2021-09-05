@@ -39,7 +39,11 @@ fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
         ) {
             when (viewState) {
                 is MainViewState.Success -> {
-                    CreditScoreWidget(viewState)
+                    DonutWidget(
+                        progress = viewState.progress,
+                        scoreText = viewState.scoreText,
+                        caption = viewState.caption
+                    )
                 }
                 is MainViewState.Failure -> {
                     Failure(viewState.message, onRetry)
@@ -60,8 +64,7 @@ fun Loading() {
 @Composable
 fun Failure(message: String, onRetry: () -> Unit) {
     Column(
-        Modifier
-            .padding(16.dp),
+        Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(message, textAlign = TextAlign.Center, color = MaterialTheme.colors.error)
@@ -72,7 +75,7 @@ fun Failure(message: String, onRetry: () -> Unit) {
     }
 }
 
-val circleFitContentLayout =
+private val circleFitContentLayout =
     fun MeasureScope.(measurable: Measurable, constraints: Constraints): MeasureResult {
         val placeable = measurable.measure(constraints)
 
@@ -93,7 +96,7 @@ val circleFitContentLayout =
 
 
 @Composable
-fun CreditScoreWidget(viewState: MainViewState.Success) {
+fun DonutWidget(progress: Float, scoreText: String, caption: String) {
     Box(
         modifier = Modifier
             .wrapContentSize()
@@ -101,7 +104,7 @@ fun CreditScoreWidget(viewState: MainViewState.Success) {
             .padding(BORDER_WIDTH + MARGIN_INSIDE_BORDER)
     ) {
         CircularProgressIndicator(
-            progress = viewState.progress,
+            progress = progress,
             modifier = Modifier.matchParentSize(),
             color = MaterialTheme.colors.secondary,
             strokeWidth = PROGRESS_INDICATOR_STROKE_WIDTH
@@ -117,13 +120,13 @@ fun CreditScoreWidget(viewState: MainViewState.Success) {
                 style = MaterialTheme.typography.subtitle2
             )
             Text(
-                viewState.scoreText,
+                scoreText,
                 style = MaterialTheme.typography.h2,
                 fontWeight = FontWeight.W200,
                 color = MaterialTheme.colors.secondary
             )
             Text(
-                viewState.caption,
+                caption,
                 style = MaterialTheme.typography.subtitle2
             )
         }
@@ -140,14 +143,22 @@ fun PreviewLoading() {
 
 @Preview
 @Composable
-fun Preview() {
+fun PreviewFailure() {
+    CreditScoreDemoTheme {
+        Failure("An error occured", {})
+    }
+}
+
+@Preview
+@Composable
+fun PreviewSuccess() {
     CreditScoreDemoTheme {
         MainScreen(
             viewState = MainViewState.Success(
                 scoreText = "327",
                 caption = "out of 700",
                 progress = 0.5f
-            ), {}
-        )
+            )
+        ) {}
     }
 }

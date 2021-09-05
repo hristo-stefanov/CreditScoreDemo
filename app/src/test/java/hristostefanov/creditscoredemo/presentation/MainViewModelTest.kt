@@ -1,7 +1,7 @@
 package hristostefanov.creditscoredemo.presentation
 
 import hristostefanov.creditscoredemo.R
-import hristostefanov.creditscoredemo.StringSupplier
+import hristostefanov.creditscoredemo.util.StringSupplier
 import hristostefanov.creditscoredemo.business.CreditScoreProgress
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor

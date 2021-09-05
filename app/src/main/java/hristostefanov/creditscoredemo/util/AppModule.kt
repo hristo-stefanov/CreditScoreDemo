@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.di
+package hristostefanov.creditscoredemo.util
 
 import android.app.Application
 import com.squareup.moshi.Moshi
@@ -9,7 +9,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hristostefanov.creditscoredemo.BuildConfig
-import hristostefanov.creditscoredemo.StringSupplier
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository

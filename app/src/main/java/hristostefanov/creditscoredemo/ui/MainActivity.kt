@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo
+package hristostefanov.creditscoredemo.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

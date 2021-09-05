@@ -9,7 +9,8 @@ class ReportCreditScoreProgressInteractorImpl @Inject constructor(
     @Throws(DataAccessException::class)
     override suspend operator fun invoke(): CreditScoreProgress {
         val creditScore = creditScoreRepository.findCreditScore()
-        val progress = creditScore.score.toFloat() / (creditScore.maxScore - creditScore.minScore)
+        val progress = (creditScore.score.toFloat() - creditScore.minScore) /
+                (creditScore.maxScore - creditScore.minScore)
         return CreditScoreProgress(
             progress = progress,
             score = creditScore.score,

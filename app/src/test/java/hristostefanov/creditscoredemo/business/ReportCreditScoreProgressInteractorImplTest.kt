@@ -1,5 +1,6 @@
 package hristostefanov.creditscoredemo.business
 
+import hristostefanov.creditscoredemo.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,6 +1,5 @@
 package hristostefanov.creditscoredemo.business.dependencies
 
-import hristostefanov.creditscoredemo.business.CreditScore
 import hristostefanov.creditscoredemo.business.DataAccessException
 
 interface CreditScoreRepository {

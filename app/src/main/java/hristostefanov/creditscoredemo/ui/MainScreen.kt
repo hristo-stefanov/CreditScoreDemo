@@ -47,7 +47,6 @@ fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
                 is MainViewState.Loading -> {
                     Loading()
                 }
-                else -> Unit
             }
         }
     }

@@ -1,6 +1,6 @@
 package hristostefanov.creditscoredemo.data
 
-import hristostefanov.creditscoredemo.business.CreditScore
+import hristostefanov.creditscoredemo.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
 import javax.inject.Inject

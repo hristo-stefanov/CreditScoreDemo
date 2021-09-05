@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(
             try {
                 val creditScoreProcess = reportCreditScoreProgressInteractor()
                 val scoreText = creditScoreProcess.score.toString()
-                val caption = stringSupplier.getString(R.string.outOf, creditScoreProcess.maxScore)
+                val caption = stringSupplier.getString(R.string.outOf).format(creditScoreProcess.maxScore)
                 _viewState.value = MainViewState.Success(
                     scoreText = scoreText,
                     caption = caption,

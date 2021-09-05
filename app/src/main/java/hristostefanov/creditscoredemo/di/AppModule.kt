@@ -18,6 +18,7 @@ import hristostefanov.creditscoredemo.data.Service
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+@Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AppModule {
@@ -40,7 +41,7 @@ abstract class AppModule {
         @Provides
         fun provideStringSupplier(application: Application): StringSupplier {
             return object : StringSupplier {
-                override fun getString(resId: Int, vararg formatArgs: Any) = application.getString(resId, * formatArgs)
+                override fun getString(resId: Int) = application.getString(resId)
             }
         }
     }

@@ -1,5 +1,7 @@
 package hristostefanov.creditscoredemo.presentation
 
+import hristostefanov.creditscoredemo.R
+import hristostefanov.creditscoredemo.StringSupplier
 import hristostefanov.creditscoredemo.business.CreditScoreProgress
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
@@ -9,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -18,7 +21,7 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.kotlin.willSuspendableAnswer
 
 @ExperimentalCoroutinesApi
-class MainViewModelTest() {
+class MainViewModelTest {
 
     @get:Rule
     internal val mockitoRule = MockitoJUnit.rule()
@@ -29,8 +32,16 @@ class MainViewModelTest() {
     @Mock
     private lateinit var reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor
 
+    @Mock
+    private lateinit var stringSupplier: StringSupplier
+
     private val viewModelUnderTest by lazy {
-        MainViewModel(reportCreditScoreProgressInteractor)
+        MainViewModel(reportCreditScoreProgressInteractor, stringSupplier)
+    }
+
+    @Before
+    fun beforeEach() {
+        given(stringSupplier.getString(R.string.outOf)).willReturn("out of %1s")
     }
 
     // NOTE delay() calls do not delay the actual execution but advance the virtual clock

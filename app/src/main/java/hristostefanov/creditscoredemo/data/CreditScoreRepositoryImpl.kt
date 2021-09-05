@@ -1,7 +1,7 @@
 package hristostefanov.creditscoredemo.data
 
-import hristostefanov.creditscoredemo.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.business.DataAccessException
+import hristostefanov.creditscoredemo.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
 import javax.inject.Inject
 
@@ -9,16 +9,15 @@ class CreditScoreRepositoryImpl @Inject constructor(private val service: Service
     @Throws(DataAccessException::class)
     override suspend fun findCreditScore(): CreditScore {
         @Suppress("BlockingMethodInNonBlockingContext") // false positive triggered by throws IOException
-
         return try {
-            service.getResponse().let {
+            service.getResponse().creditReportInfo.let { info ->
                 CreditScore(
-                    id = it.creditReportInfo.clientRef,
-                    score = it.creditReportInfo.score,
-                    minScore = it.creditReportInfo.minScoreValue,
-                    maxScore = it.creditReportInfo.maxScoreValue,
-                    scoreBand = it.creditReportInfo.scoreBand,
-                    scoreChange = it.creditReportInfo.changedScore
+                    id = info.clientRef,
+                    score = info.score,
+                    minScore = info.minScoreValue,
+                    maxScore = info.maxScoreValue,
+                    scoreBand = info.scoreBand,
+                    scoreChange = info.changedScore
                 )
             }
         } catch (e: Exception) {

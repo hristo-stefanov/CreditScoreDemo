@@ -1,5 +1,6 @@
 package hristostefanov.creditscoredemo.data
 
+import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.data.models.CreditReportInfo
 import hristostefanov.creditscoredemo.data.models.Response
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
@@ -12,6 +13,7 @@ import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.then
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
+import java.io.IOException
 
 @Suppress("BlockingMethodInNonBlockingContext") // false positive triggered by throwing IOException
 @ExperimentalCoroutinesApi
@@ -26,12 +28,12 @@ class CreditScoreRepositoryImplTest {
     @Mock
     private lateinit var service: Service
 
-    private val repoitoryUnderTest by lazy {
+    private val repositoryUnderTest by lazy {
         CreditScoreRepositoryImpl(service)
     }
 
     @Test
-    fun findCreditScore() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun success() = coroutinesRule.testDispatcher.runBlockingTest {
         val response =
             Response(
                 creditReportInfo = CreditReportInfo(
@@ -44,7 +46,7 @@ class CreditScoreRepositoryImplTest {
             )
         given(service.getResponse()).willReturn(response)
 
-        val result = repoitoryUnderTest.findCreditScore()
+        val result = repositoryUnderTest.findCreditScore()
 
         Assertions.assertThat(result).matches {
             it.maxScore == 500
@@ -53,6 +55,31 @@ class CreditScoreRepositoryImplTest {
                     && it.scoreBand == 3
                     && it.scoreChange == 5
         }
+    }
+
+    @Test(expected = DataAccessException::class)
+    fun failure() = coroutinesRule.testDispatcher.runBlockingTest {
+        given(service.getResponse()).willThrow(IOException())
+
+        repositoryUnderTest.findCreditScore()
+    }
+
+    @Test
+    fun interactions() = coroutinesRule.testDispatcher.runBlockingTest {
+        val response =
+            Response(
+                creditReportInfo = CreditReportInfo(
+                    score = 200,
+                    minScoreValue = 100,
+                    maxScoreValue = 500,
+                    scoreBand = 3,
+                    changedScore = 5
+                )
+            )
+        given(service.getResponse()).willReturn(response)
+
+        repositoryUnderTest.findCreditScore()
+
         then(service).should().getResponse()
         then(service).shouldHaveNoMoreInteractions()
     }

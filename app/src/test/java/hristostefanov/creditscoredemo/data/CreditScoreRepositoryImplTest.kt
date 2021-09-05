@@ -13,6 +13,7 @@ import org.mockito.BDDMockito.then
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 
+@Suppress("BlockingMethodInNonBlockingContext") // false positive triggered by throwing IOException
 @ExperimentalCoroutinesApi
 class CreditScoreRepositoryImplTest {
 

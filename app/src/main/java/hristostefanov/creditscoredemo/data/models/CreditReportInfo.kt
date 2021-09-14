@@ -1,5 +1,8 @@
 package hristostefanov.creditscoredemo.data.models
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class CreditReportInfo(
     val changeInLongTermDebt: Int = 0,
     val changeInShortTermDebt: Int = 0,

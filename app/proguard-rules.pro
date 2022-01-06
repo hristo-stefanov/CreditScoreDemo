@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Currently Moshi is used with adapters (not reflection) to this is not needed, but keep it
+# for reference
+#-keep class hristostefanov.creditscoredemo.data.models.** { *; }

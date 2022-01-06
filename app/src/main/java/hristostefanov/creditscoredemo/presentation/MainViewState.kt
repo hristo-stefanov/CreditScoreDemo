@@ -16,5 +16,8 @@ sealed interface MainViewState {
 
     @Immutable
     object Loading: MainViewState
+
+    @Immutable
+    object Empty: MainViewState
 }
 

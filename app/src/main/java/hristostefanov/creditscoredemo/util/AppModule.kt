@@ -29,7 +29,7 @@ abstract class AppModule {
                 .add(KotlinJsonAdapterFactory())
                 .build()
             return Retrofit.Builder()
-                .baseUrl(BuildConfig.SERVICE_BASE_URL)
+                .baseUrl(Config.SERVICE_BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
         }

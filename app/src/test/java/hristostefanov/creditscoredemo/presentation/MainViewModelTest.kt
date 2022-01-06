@@ -44,8 +44,6 @@ class MainViewModelTest {
         given(stringSupplier.getString(R.string.outOf)).willReturn("out of %1s")
     }
 
-    // NOTE delay() calls do not delay the actual execution but advance the virtual clock
-
     @Test
     fun success() = coroutinesRule.testDispatcher.runBlockingTest {
         given(reportCreditScoreProgressInteractor()).willSuspendableAnswer {
@@ -56,9 +54,9 @@ class MainViewModelTest {
         viewModelUnderTest // load
 
         assertThat(viewModelUnderTest.viewState.value).isEqualTo(MainViewState.Loading)
-        delay(9)
+        advanceTimeBy(9)
         assertThat(viewModelUnderTest.viewState.value).isEqualTo(MainViewState.Loading)
-        delay(2)
+        advanceTimeBy(2)
         assertThat(viewModelUnderTest.viewState.value).matches {
             it is MainViewState.Success && it.caption == "out of 500" && it.scoreText == "200"
         }

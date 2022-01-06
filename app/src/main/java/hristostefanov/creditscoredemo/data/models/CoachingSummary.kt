@@ -1,5 +1,8 @@
 package hristostefanov.creditscoredemo.data.models
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class CoachingSummary(
     val activeChat: Boolean = false,
     val activeTodo: Boolean = false,

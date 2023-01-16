@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+
+    //    id 'app.cash.paparazzi' version '1.1.0'
+    id 'dev.chrisbanes.paparazzi' version '1.1.0-sdk33-alpha02'
 }
 
 android {

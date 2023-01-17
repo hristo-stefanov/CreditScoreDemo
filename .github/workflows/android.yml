@@ -41,17 +41,25 @@ jobs:
       # other resources etc.
       run: bash ./gradlew assemble
 
-    - name: Run tests (unit tests + Espresso tests on Robolectric)
-      # NOTE: because of the fragment-testing library, only the debug build type
+    - name: Run local unit tests (including any AndroidJUnit4 tests run with Robolectric)
+      # NOTE: If using the fragment-testing library, only the debug build type
       # can be used. Other build types fail to build with the test source set.
       # see app/build.gradle
       run: bash ./gradlew testDebug --stacktrace
 
+    - name: Verify snapshots
+      # Paparazzi tests are run as normal JUnit tests and they generate reports, but they do not
+      # verify the snapshots against the reference ones. Hence, running this Gradle task
+      run: bash ./gradlew verifyPaparazziDebug
+
     - name: Upload Test Reports
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Test reports
-        path: app/build/reports/tests/
+        path: |
+          */build/reports/
+          # Paparazzi delta images for failed tests
+          */out/failures/delta-*.png
 
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.

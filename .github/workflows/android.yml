@@ -17,8 +17,8 @@ jobs:
       with:
         lfs: true
 
-    - name: Debug
-      run: tree
+#    - name: Print the file tree for debugging
+#      run: tree
 
     - name: set up JDK 11
       uses: actions/setup-java@v3
@@ -72,11 +72,10 @@ jobs:
         path: |
           */out/failures/delta-*.png
 
-      # TODO commented out for debugging
-#    - name: Build APK
+    - name: Build APK
       # Make sure the branch code can produce final deliverables (APKs) by merging manifest files,
       # other resources etc. This will produce an unsigned release APK.
-      #run: bash ./gradlew assembleRelease
+      run: bash ./gradlew assembleRelease
 
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.

@@ -18,7 +18,7 @@ jobs:
         lfs: true
 
     -name: Debug
-      run: bash tree
+      run: tree
 
     - name: set up JDK 11
       uses: actions/setup-java@v3

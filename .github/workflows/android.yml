@@ -16,6 +16,10 @@ jobs:
     - uses: actions/checkout@v3
       with:
         lfs: true
+
+    -name: Debug
+      run: bash tree
+
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -38,11 +42,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Build APK
-      # Make sure the branch code can produce final deliverables (APKs) by merging manifest files,
-      # other resources etc.
-      run: bash ./gradlew assemble
-
     - name: Run local unit tests (including any AndroidJUnit4 tests run with Robolectric)
       # NOTE: If using the fragment-testing library, only the debug build type
       # can be used. Other build types fail to build with the test source set.
@@ -62,6 +61,13 @@ jobs:
           */build/reports/
           # Paparazzi delta images for failed tests
           */out/failures/delta-*.png
+
+      # TODO commented out for debugging
+#    - name: Build APK
+      # Make sure the branch code can produce final deliverables (APKs) by merging manifest files,
+      # other resources etc. This will produce an unsigned release APK.
+      #run: bash ./gradlew assembleRelease
+
 
     - name: Cleanup Gradle Cache
       # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.

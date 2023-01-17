@@ -25,7 +25,7 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
-private val BORDER_WIDTH = 3.dp
+private val BORDER_WIDTH = 2.dp
 private val PROGRESS_INDICATOR_STROKE_WIDTH = 4.dp
 private val MARGIN_INSIDE_PROGRESS_INDICATOR = 16.dp
 private val MARGIN_INSIDE_BORDER = 4.dp

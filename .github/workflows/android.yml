@@ -49,19 +49,24 @@ jobs:
       # see app/build.gradle
 #      run: bash ./gradlew testDebug --stacktrace
 
+#    - name: Upload Test Reports
+#      if: always()
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: Test reports
+#        path: */build/reports/tests/
+
     - name: Verify snapshots
       # Paparazzi tests are run as normal JUnit tests and they generate reports, but they do not
       # verify the snapshots against the reference ones. Hence, running this Gradle task
       run: bash ./gradlew verifyPaparazziDebug
 
-    - name: Upload Test Reports
+    - name: Upload Paparazzi delta images for failed tests
+      if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: Test reports
-        path: |
-          */build/reports/
-          # Paparazzi delta images for failed tests
-          */out/failures/delta-*.png
+        path: */out/failures/delta-*.png
 
       # TODO commented out for debugging
 #    - name: Build APK

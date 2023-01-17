@@ -17,7 +17,7 @@ jobs:
       with:
         lfs: true
 
-    -name: Debug
+    - name: Debug
       run: tree
 
     - name: set up JDK 11

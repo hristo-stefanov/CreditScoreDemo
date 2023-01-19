@@ -8,7 +8,7 @@ import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import org.junit.Rule
 import org.junit.Test
 
-class SnapshotTest {
+class DonutSnapshotTest {
     @get:Rule
     val paparazzi = Paparazzi(
         deviceConfig = DeviceConfig.PIXEL_5.copy(screenHeight = 1, softButtons = false),

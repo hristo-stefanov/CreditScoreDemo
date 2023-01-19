@@ -17,7 +17,7 @@ import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
     Scaffold {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.padding(it).fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             when (viewState) {

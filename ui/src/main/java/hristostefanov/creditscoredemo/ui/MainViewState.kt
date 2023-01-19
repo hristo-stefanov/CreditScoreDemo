@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.presentation
+package hristostefanov.creditscoredemo.ui
 
 import androidx.compose.runtime.Immutable
 

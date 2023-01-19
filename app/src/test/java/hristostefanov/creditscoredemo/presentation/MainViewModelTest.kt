@@ -4,6 +4,7 @@ import hristostefanov.creditscoredemo.R
 import hristostefanov.creditscoredemo.business.CreditScoreProgress
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
+import hristostefanov.creditscoredemo.ui.MainViewState
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import hristostefanov.creditscoredemo.util.StringSupplier
 import kotlinx.coroutines.ExperimentalCoroutinesApi

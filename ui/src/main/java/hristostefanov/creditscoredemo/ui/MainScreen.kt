@@ -67,18 +67,22 @@ fun Failure(message: String, onRetry: () -> Unit) {
     }
 }
 
-val MainScreenPreviewStates by lazy {
-    listOf(
-        MainViewState.Success(
-            "350",
-            "out of 700",
-            0.5f
-        ),
+val MainScreenPreviewSuccess
+    get() = MainViewState.Success(
+        "350",
+        "out of 700",
+        0.5f
+    )
+
+val MainScreenPreviewFailure get() = MainViewState.Failure("An error occurred")
+
+val MainScreenPreviewStates
+    get() = listOf(
+        MainScreenPreviewSuccess,
         MainViewState.Empty,
         MainViewState.Loading,
-        MainViewState.Failure("An error occurred")
+        MainScreenPreviewFailure
     )
-}
 
 private class StateProvider : PreviewParameterProvider<MainViewState> {
     override val values: Sequence<MainViewState> = MainScreenPreviewStates.asSequence()

@@ -24,7 +24,7 @@ class MainScreenSnapshotTest {
 
     @Test
     fun test(@TestParameter(valuesProvider = ViewStateProvider::class) viewState: MainViewState) {
-        paparazzi.snapshot() {
+        paparazzi.snapshot {
             CreditScoreDemoTheme {
                 MainScreen(viewState) {}
             }

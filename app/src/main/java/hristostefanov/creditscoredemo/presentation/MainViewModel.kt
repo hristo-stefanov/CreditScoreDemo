@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hristostefanov.creditscoredemo.R
 import hristostefanov.creditscoredemo.business.DataAccessException
 import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
+import hristostefanov.creditscoredemo.ui.MainViewState
 import hristostefanov.creditscoredemo.util.StringSupplier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

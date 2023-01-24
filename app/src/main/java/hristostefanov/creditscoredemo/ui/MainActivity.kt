@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import hristostefanov.creditscoredemo.presentation.MainViewModel
-import hristostefanov.creditscoredemo.presentation.MainViewState
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @AndroidEntryPoint

@@ -1,5 +1,6 @@
 package hristostefanov.creditscoredemo.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -8,17 +9,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import hristostefanov.creditscoredemo.R
-import hristostefanov.creditscoredemo.donut.DonutWidget
-import hristostefanov.creditscoredemo.presentation.MainViewState
+import hristostefanov.creditscoredemo.donut.R
+import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @Composable
 fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
     Scaffold {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             when (viewState) {
@@ -63,32 +67,33 @@ fun Failure(message: String, onRetry: () -> Unit) {
     }
 }
 
-@Preview
-@Composable
-fun PreviewLoading() {
-    CreditScoreDemoTheme {
-        Loading()
-    }
+val MainScreenPreviewSuccess
+    get() = MainViewState.Success(
+        "350",
+        "out of 700",
+        0.5f
+    )
+
+val MainScreenPreviewFailure get() = MainViewState.Failure("An error occurred")
+
+val MainScreenPreviewStates
+    get() = listOf(
+        MainScreenPreviewSuccess,
+        MainViewState.Empty,
+        MainViewState.Loading,
+        MainScreenPreviewFailure
+    )
+
+private class StateProvider : PreviewParameterProvider<MainViewState> {
+    override val values: Sequence<MainViewState> = MainScreenPreviewStates.asSequence()
 }
 
-@Preview
+@Preview("Default")
+@Preview("Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("Large text", fontScale = 1.5f)
 @Composable
-fun PreviewFailure() {
+fun Preview(@PreviewParameter(StateProvider::class) viewState: MainViewState) {
     CreditScoreDemoTheme {
-        Failure("An error occured", {})
-    }
-}
-
-@Preview
-@Composable
-fun PreviewSuccess() {
-    CreditScoreDemoTheme {
-        MainScreen(
-            viewState = MainViewState.Success(
-                scoreText = "327",
-                caption = "out of 700",
-                progress = 0.5f
-            )
-        ) {}
+        MainScreen(viewState) {}
     }
 }

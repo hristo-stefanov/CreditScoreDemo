@@ -52,5 +52,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling"
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.google.testparameterinjector:test-parameter-injector:1.10'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 }

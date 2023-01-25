@@ -92,7 +92,7 @@ private class StateProvider : PreviewParameterProvider<MainViewState> {
 @Preview("Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("Large text", fontScale = 1.5f)
 @Composable
-fun Preview(@PreviewParameter(StateProvider::class) viewState: MainViewState) {
+private fun Preview(@PreviewParameter(StateProvider::class) viewState: MainViewState) {
     CreditScoreDemoTheme {
         MainScreen(viewState, {})
     }

@@ -25,7 +25,7 @@ class MainScreenSnapshotTest {
     fun test(@TestParameter state: State) {
         paparazzi.snapshot {
             CreditScoreDemoTheme {
-                MainScreen(state.mainViewState) {}
+                MainScreen(state.mainViewState, {})
             }
         }
     }
@@ -37,6 +37,7 @@ class MainScreenSnapshotTest {
     // When "data object" Kotlin feature becomes official (experimental in 1.8) we could use
     // TestParameterValuesProvider instead of defining such enum classes.
 
+    @Suppress("unused")
     enum class State(val mainViewState: MainViewState) {
         Success(MainScreenPreviewSuccess),
         Failure(MainScreenPreviewFailure),

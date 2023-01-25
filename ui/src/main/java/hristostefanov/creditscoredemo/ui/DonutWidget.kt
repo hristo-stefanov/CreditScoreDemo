@@ -31,9 +31,15 @@ private val MARGIN_INSIDE_PROGRESS_INDICATOR = 16.dp
 private val MARGIN_INSIDE_BORDER = 4.dp
 
 @Composable
-fun DonutWidget(progress: Float, scoreText: String, caption: String, title: String) {
+fun DonutWidget(
+    progress: Float,
+    scoreText: String,
+    caption: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize()
             .border(BORDER_WIDTH, MaterialTheme.colors.onBackground, CircleShape)
             .padding(BORDER_WIDTH + MARGIN_INSIDE_BORDER)

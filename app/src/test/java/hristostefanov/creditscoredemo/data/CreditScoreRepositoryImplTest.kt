@@ -5,7 +5,7 @@ import hristostefanov.creditscoredemo.data.models.CreditReportInfo
 import hristostefanov.creditscoredemo.data.models.Response
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions
 import org.junit.Rule
 import org.junit.Test
@@ -33,7 +33,7 @@ class CreditScoreRepositoryImplTest {
     }
 
     @Test
-    fun success() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun success() = runTest(coroutinesRule.testDispatcher) {
         val response =
             Response(
                 creditReportInfo = CreditReportInfo(
@@ -58,14 +58,14 @@ class CreditScoreRepositoryImplTest {
     }
 
     @Test(expected = DataAccessException::class)
-    fun failure() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun failure() = runTest(coroutinesRule.testDispatcher) {
         given(service.getResponse()).willThrow(IOException())
 
         repositoryUnderTest.findCreditScore()
     }
 
     @Test
-    fun interactions() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun interactions() = runTest(coroutinesRule.testDispatcher) {
         val response =
             Response(
                 creditReportInfo = CreditReportInfo(

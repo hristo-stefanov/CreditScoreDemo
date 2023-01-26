@@ -2,7 +2,8 @@ package hristostefanov.creditscoredemo.util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
@@ -13,20 +14,23 @@ import org.junit.runner.Description
 // rule creates. Since that Dispatcher overrides Dispatchers.Main, MainViewModel will run the
 // coroutine on that Dispatcher too. Calling runBlockingTest will make that coroutine to execute
 // synchronously in the test."
+//
+// See also: https://developer.android.com/kotlin/coroutines/test
 
 @ExperimentalCoroutinesApi
 class CoroutinesTestRule(
-    val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    // Note: UnconfinedTestDispatcher eagerly runs new coroutines, unlike StandardTestDispatcher
+    // which requires some way of explicit yielding for precise control.
+    val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 ) : TestWatcher() {
 
-    override fun starting(description: Description?) {
+    override fun starting(description: Description) {
         super.starting(description)
         Dispatchers.setMain(testDispatcher)
     }
 
-    override fun finished(description: Description?) {
+    override fun finished(description: Description) {
         super.finished(description)
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 }

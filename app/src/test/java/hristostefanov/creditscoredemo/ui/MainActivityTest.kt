@@ -36,11 +36,11 @@ class MainActivityTest {
 
     @get:Rule(order = 1)
     val rule = object : TestWatcher() {
-        override fun starting(description: Description?) {
+        override fun starting(description: Description) {
             startMockWebServer()
         }
 
-        override fun finished(description: Description?) {
+        override fun finished(description: Description) {
             stopMockWebServer()
         }
     }

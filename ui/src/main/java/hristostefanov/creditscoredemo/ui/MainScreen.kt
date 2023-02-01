@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import hristostefanov.creditscoredemo.donut.R
 import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 

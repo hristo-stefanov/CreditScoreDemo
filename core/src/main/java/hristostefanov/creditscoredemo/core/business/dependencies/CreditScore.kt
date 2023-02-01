@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.business.dependencies
+package hristostefanov.creditscoredemo.core.business.dependencies
 
 data class CreditScore(
     val id: String,

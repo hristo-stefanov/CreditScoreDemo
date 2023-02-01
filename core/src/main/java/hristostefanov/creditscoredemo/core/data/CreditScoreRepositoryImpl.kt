@@ -1,11 +1,12 @@
-package hristostefanov.creditscoredemo.data
+package hristostefanov.creditscoredemo.core.data
 
-import hristostefanov.creditscoredemo.business.DataAccessException
-import hristostefanov.creditscoredemo.business.dependencies.CreditScore
-import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
+import hristostefanov.creditscoredemo.core.business.DataAccessException
+import hristostefanov.creditscoredemo.core.business.dependencies.CreditScore
+import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
 import javax.inject.Inject
 
-class CreditScoreRepositoryImpl @Inject constructor(private val service: Service) : CreditScoreRepository {
+class CreditScoreRepositoryImpl @Inject constructor(private val service: Service) :
+    CreditScoreRepository {
     @Throws(DataAccessException::class)
     override suspend fun findCreditScore(): CreditScore {
         @Suppress("BlockingMethodInNonBlockingContext") // false positive triggered by throws IOException

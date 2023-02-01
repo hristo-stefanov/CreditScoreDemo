@@ -1,6 +1,6 @@
-package hristostefanov.creditscoredemo.business
+package hristostefanov.creditscoredemo.core.business
 
-import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
+import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
 import javax.inject.Inject
 
 class ReportCreditScoreProgressInteractorImpl @Inject constructor(

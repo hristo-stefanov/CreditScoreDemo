@@ -8,12 +8,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import hristostefanov.creditscoredemo.BuildConfig
-import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
-import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractorImpl
-import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
-import hristostefanov.creditscoredemo.data.CreditScoreRepositoryImpl
-import hristostefanov.creditscoredemo.data.Service
+import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
+import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractorImpl
+import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
+import hristostefanov.creditscoredemo.core.data.CreditScoreRepositoryImpl
+import hristostefanov.creditscoredemo.core.data.Service
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hristostefanov.creditscoredemo.R
-import hristostefanov.creditscoredemo.business.DataAccessException
-import hristostefanov.creditscoredemo.business.ReportCreditScoreProgressInteractor
+import hristostefanov.creditscoredemo.core.business.DataAccessException
+import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.ui.MainViewState
 import hristostefanov.creditscoredemo.util.StringSupplier
 import kotlinx.coroutines.flow.MutableStateFlow

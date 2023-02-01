@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.data.models
+package hristostefanov.creditscoredemo.core.data.models
 
 import com.squareup.moshi.JsonClass
 

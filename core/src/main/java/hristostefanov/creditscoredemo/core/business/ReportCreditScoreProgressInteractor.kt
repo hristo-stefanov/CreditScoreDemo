@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.business
+package hristostefanov.creditscoredemo.core.business
 
 interface ReportCreditScoreProgressInteractor {
     @Throws(DataAccessException::class)

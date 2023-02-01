@@ -1,8 +1,10 @@
 package hristostefanov.creditscoredemo.data
 
-import hristostefanov.creditscoredemo.business.DataAccessException
-import hristostefanov.creditscoredemo.data.models.CreditReportInfo
-import hristostefanov.creditscoredemo.data.models.Response
+import hristostefanov.creditscoredemo.core.business.DataAccessException
+import hristostefanov.creditscoredemo.core.data.CreditScoreRepositoryImpl
+import hristostefanov.creditscoredemo.core.data.Service
+import hristostefanov.creditscoredemo.core.data.models.CreditReportInfo
+import hristostefanov.creditscoredemo.core.data.models.Response
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

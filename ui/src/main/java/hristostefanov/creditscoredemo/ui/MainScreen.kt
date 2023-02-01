@@ -17,8 +17,8 @@ import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @Composable
-fun MainScreen(viewState: MainViewState, onRetry: () -> Unit) {
-    Scaffold {
+fun MainScreen(viewState: MainViewState, onRetry: () -> Unit, modifier: Modifier = Modifier) {
+    Scaffold(modifier) {
         Box(
             modifier = Modifier
                 .padding(it)
@@ -92,8 +92,8 @@ private class StateProvider : PreviewParameterProvider<MainViewState> {
 @Preview("Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("Large text", fontScale = 1.5f)
 @Composable
-fun Preview(@PreviewParameter(StateProvider::class) viewState: MainViewState) {
+private fun Preview(@PreviewParameter(StateProvider::class) viewState: MainViewState) {
     CreditScoreDemoTheme {
-        MainScreen(viewState) {}
+        MainScreen(viewState, {})
     }
 }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.advanceTimeBy
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -47,7 +47,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun success() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun success() = runTest(coroutinesRule.testDispatcher) {
         given(reportCreditScoreProgressInteractor()).willSuspendableAnswer {
             delay(10)
             CreditScoreProgress(0.5f, 200, 500, 100)
@@ -65,7 +65,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun failure() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun failure() = runTest(coroutinesRule.testDispatcher) {
         given(reportCreditScoreProgressInteractor()).willThrow(DataAccessException("failure"))
 
         val result = viewModelUnderTest.viewState.first()
@@ -76,7 +76,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun interactions() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun interactions() = runTest(coroutinesRule.testDispatcher) {
         given(reportCreditScoreProgressInteractor()).willReturn(
             CreditScoreProgress(0.5f, 200, 500, 100)
         )

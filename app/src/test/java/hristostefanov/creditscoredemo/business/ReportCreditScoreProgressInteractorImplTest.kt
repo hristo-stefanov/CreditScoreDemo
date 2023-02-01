@@ -4,7 +4,7 @@ import hristostefanov.creditscoredemo.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.business.dependencies.CreditScoreRepository
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnit
 class ReportCreditScoreProgressInteractorImplTest {
 
     @get:Rule
-    internal val mockitorRule = MockitoJUnit.rule()
+    internal val mockitoRule = MockitoJUnit.rule()
 
     @get:Rule
     internal val coroutinesRule = CoroutinesTestRule()
@@ -30,7 +30,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun mediumProgress() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun mediumProgress() = runTest(coroutinesRule.testDispatcher) {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -50,7 +50,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun minimumProgress() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun minimumProgress() = runTest(coroutinesRule.testDispatcher) {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -71,7 +71,7 @@ class ReportCreditScoreProgressInteractorImplTest {
 
 
     @Test
-    fun maximumProgress() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun maximumProgress() = runTest(coroutinesRule.testDispatcher) {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -91,7 +91,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun interactions() = coroutinesRule.testDispatcher.runBlockingTest {
+    fun interactions() = runTest(coroutinesRule.testDispatcher) {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",

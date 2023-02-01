@@ -6,7 +6,7 @@ import hristostefanov.creditscoredemo.data.models.Response
 import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -48,7 +48,7 @@ class CreditScoreRepositoryImplTest {
 
         val result = repositoryUnderTest.findCreditScore()
 
-        Assertions.assertThat(result).matches {
+        assertThat(result).matches {
             it.maxScore == 500
                     && it.score == 200
                     && it.minScore == 100

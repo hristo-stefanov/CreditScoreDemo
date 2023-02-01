@@ -35,7 +35,7 @@ class MainActivityTest {
     internal val hiltRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
-    val rule = object : TestWatcher() {
+    val mockWebServerRule = object : TestWatcher() {
         override fun starting(description: Description) {
             startMockWebServer()
         }

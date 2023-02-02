@@ -1,6 +1,5 @@
-package hristostefanov.creditscoredemo.util
+package hristostefanov.creditscoredemo.core
 
-import hristostefanov.creditscoredemo.BuildConfig
 
 object Config {
     // an alternative would be keeping it in shared preferences where end-to-end

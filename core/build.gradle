@@ -13,6 +13,8 @@ android {
         minSdk 23
         targetSdk 33
 
+        buildConfigField("String", "SERVICE_BASE_URL", '"https://android-interview.s3.eu-west-2.amazonaws.com"')
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -53,6 +55,9 @@ dependencies {
 
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.assertj:assertj-core:3.20.2"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

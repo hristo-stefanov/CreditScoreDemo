@@ -1,9 +1,7 @@
-package hristostefanov.creditscoredemo.business
+package hristostefanov.creditscoredemo.core.business
 
-import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
-import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -20,9 +18,6 @@ class ReportCreditScoreProgressInteractorImplTest {
     @get:Rule
     internal val mockitoRule = MockitoJUnit.rule()
 
-    @get:Rule
-    internal val coroutinesRule = CoroutinesTestRule()
-
     @Mock
     private lateinit var creditScoreRepository: CreditScoreRepository
 
@@ -31,7 +26,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun mediumProgress() = runTest(coroutinesRule.testDispatcher) {
+    fun mediumProgress() = runTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -51,7 +46,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun minimumProgress() = runTest(coroutinesRule.testDispatcher) {
+    fun minimumProgress() = runTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -72,7 +67,7 @@ class ReportCreditScoreProgressInteractorImplTest {
 
 
     @Test
-    fun maximumProgress() = runTest(coroutinesRule.testDispatcher) {
+    fun maximumProgress() = runTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",
@@ -92,7 +87,7 @@ class ReportCreditScoreProgressInteractorImplTest {
     }
 
     @Test
-    fun interactions() = runTest(coroutinesRule.testDispatcher) {
+    fun interactions() = runTest {
         given(creditScoreRepository.findCreditScore()).willReturn(
             CreditScore(
                 id = "user123",

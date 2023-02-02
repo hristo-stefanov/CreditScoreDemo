@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -12,8 +13,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
+
+@Composable
+fun MainScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = viewModel()
+) {
+    val viewState by viewModel.viewState.collectAsStateWithLifecycle()
+    MainScreen(viewState, viewModel::onRetry, modifier)
+}
 
 @Composable
 fun MainScreen(viewState: MainViewState, onRetry: () -> Unit, modifier: Modifier = Modifier) {
@@ -48,12 +60,12 @@ fun MainScreen(viewState: MainViewState, onRetry: () -> Unit, modifier: Modifier
 }
 
 @Composable
-fun Loading() {
+private fun Loading() {
     CircularProgressIndicator()
 }
 
 @Composable
-fun Failure(message: String, onRetry: () -> Unit) {
+private fun Failure(message: String, onRetry: () -> Unit) {
     Column(
         Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally

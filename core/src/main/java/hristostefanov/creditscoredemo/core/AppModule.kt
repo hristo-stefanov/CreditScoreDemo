@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.util
+package hristostefanov.creditscoredemo.core
 
 import android.app.Application
 import com.squareup.moshi.Moshi

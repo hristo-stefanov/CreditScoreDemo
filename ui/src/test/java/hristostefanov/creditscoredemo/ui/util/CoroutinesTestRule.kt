@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.util
+package hristostefanov.creditscoredemo.ui.util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

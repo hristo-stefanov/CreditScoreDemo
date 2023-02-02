@@ -1,11 +1,8 @@
-package hristostefanov.creditscoredemo.data
+package hristostefanov.creditscoredemo.core.data
 
 import hristostefanov.creditscoredemo.core.business.DataAccessException
-import hristostefanov.creditscoredemo.core.data.CreditScoreRepositoryImpl
-import hristostefanov.creditscoredemo.core.data.Service
 import hristostefanov.creditscoredemo.core.data.models.CreditReportInfo
 import hristostefanov.creditscoredemo.core.data.models.Response
-import hristostefanov.creditscoredemo.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -24,9 +21,6 @@ class CreditScoreRepositoryImplTest {
     @get:Rule
     internal val mockitoTest = MockitoJUnit.rule()
 
-    @get:Rule
-    internal val coroutinesRule = CoroutinesTestRule()
-
     @Mock
     private lateinit var service: Service
 
@@ -35,7 +29,7 @@ class CreditScoreRepositoryImplTest {
     }
 
     @Test
-    fun success() = runTest(coroutinesRule.testDispatcher) {
+    fun success() = runTest {
         val response =
             Response(
                 creditReportInfo = CreditReportInfo(
@@ -60,14 +54,14 @@ class CreditScoreRepositoryImplTest {
     }
 
     @Test(expected = DataAccessException::class)
-    fun failure() = runTest(coroutinesRule.testDispatcher) {
+    fun failure() = runTest {
         given(service.getResponse()).willThrow(IOException())
 
         repositoryUnderTest.findCreditScore()
     }
 
     @Test
-    fun interactions() = runTest(coroutinesRule.testDispatcher) {
+    fun interactions() = runTest {
         val response =
             Response(
                 creditReportInfo = CreditReportInfo(

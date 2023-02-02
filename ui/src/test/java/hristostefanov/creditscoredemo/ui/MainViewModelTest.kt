@@ -1,12 +1,9 @@
-package hristostefanov.creditscoredemo.presentation
+package hristostefanov.creditscoredemo.ui
 
-import hristostefanov.creditscoredemo.R
 import hristostefanov.creditscoredemo.core.business.CreditScoreProgress
 import hristostefanov.creditscoredemo.core.business.DataAccessException
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
-import hristostefanov.creditscoredemo.ui.MainViewState
-import hristostefanov.creditscoredemo.util.CoroutinesTestRule
-import hristostefanov.creditscoredemo.util.StringSupplier
+import hristostefanov.creditscoredemo.ui.util.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -35,7 +32,7 @@ class MainViewModelTest {
     private lateinit var reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor
 
     @Mock
-    private lateinit var stringSupplier: StringSupplier
+    private lateinit var stringSupplier: hristostefanov.creditscoredemo.core.StringSupplier
 
     private val viewModelUnderTest by lazy {
         MainViewModel(reportCreditScoreProgressInteractor, stringSupplier)

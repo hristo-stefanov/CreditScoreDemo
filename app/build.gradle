@@ -16,8 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_BASE_URL", '"https://android-interview.s3.eu-west-2.amazonaws.com"')
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -52,11 +50,13 @@ android {
 }
 
 dependencies {
-    def lifecycleVersion = '2.6.0-alpha04'
     implementation implementation(project(':ui'))
     implementation implementation(project(':core'))
+
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'com.google.android.material:material:1.7.0'
+
+    def lifecycleVersion = '2.6.0-alpha04'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
@@ -85,11 +85,11 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.assertj:assertj-core:3.20.2"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+
     testImplementation 'androidx.test.ext:junit:1.1.5'
     testImplementation 'androidx.test:rules:1.5.0'
     // to run AndroidJUnit4 annotated local tests with Robolectric environment

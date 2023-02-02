@@ -23,7 +23,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import hristostefanov.creditscoredemo.util.Config as UtilConfig
+import hristostefanov.creditscoredemo.core.Config as UtilConfig
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)

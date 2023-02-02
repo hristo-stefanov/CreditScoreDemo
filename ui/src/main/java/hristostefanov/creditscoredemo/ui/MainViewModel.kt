@@ -1,13 +1,10 @@
-package hristostefanov.creditscoredemo.presentation
+package hristostefanov.creditscoredemo.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hristostefanov.creditscoredemo.R
 import hristostefanov.creditscoredemo.core.business.DataAccessException
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
-import hristostefanov.creditscoredemo.ui.MainViewState
-import hristostefanov.creditscoredemo.util.StringSupplier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor,
-    private val stringSupplier: StringSupplier
+    private val stringSupplier: hristostefanov.creditscoredemo.core.StringSupplier
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow<MainViewState>(MainViewState.Loading)

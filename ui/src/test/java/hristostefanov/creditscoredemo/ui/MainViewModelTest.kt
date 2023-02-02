@@ -32,7 +32,7 @@ class MainViewModelTest {
     private lateinit var reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor
 
     @Mock
-    private lateinit var stringSupplier: hristostefanov.creditscoredemo.core.StringSupplier
+    private lateinit var stringSupplier: StringSupplier
 
     private val viewModelUnderTest by lazy {
         MainViewModel(reportCreditScoreProgressInteractor, stringSupplier)

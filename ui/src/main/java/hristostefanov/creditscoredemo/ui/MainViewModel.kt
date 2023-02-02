@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val reportCreditScoreProgressInteractor: ReportCreditScoreProgressInteractor,
-    private val stringSupplier: hristostefanov.creditscoredemo.core.StringSupplier
+    private val stringSupplier: StringSupplier
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow<MainViewState>(MainViewState.Loading)

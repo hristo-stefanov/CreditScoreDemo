@@ -1,6 +1,5 @@
 package hristostefanov.creditscoredemo.core
 
-import android.app.Application
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
@@ -19,7 +18,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AppModule {
+abstract class NetworkModule {
     companion object {
         @Provides
         fun provideRetrofit(): Retrofit {
@@ -35,13 +34,6 @@ abstract class AppModule {
 
         @Provides
         fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
-
-        @Provides
-        fun provideStringSupplier(application: Application): StringSupplier {
-            return object : StringSupplier {
-                override fun getString(resId: Int) = application.getString(resId)
-            }
-        }
     }
 
     @Binds

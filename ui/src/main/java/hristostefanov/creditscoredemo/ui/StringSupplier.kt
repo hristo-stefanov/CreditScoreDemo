@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.core
+package hristostefanov.creditscoredemo.ui
 
 import androidx.annotation.StringRes
 

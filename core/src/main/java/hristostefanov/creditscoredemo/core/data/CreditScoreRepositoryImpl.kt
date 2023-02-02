@@ -5,7 +5,7 @@ import hristostefanov.creditscoredemo.core.business.dependencies.CreditScore
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
 import javax.inject.Inject
 
-class CreditScoreRepositoryImpl @Inject constructor(private val service: Service) :
+internal class CreditScoreRepositoryImpl @Inject constructor(private val service: Service) :
     CreditScoreRepository {
     @Throws(DataAccessException::class)
     override suspend fun findCreditScore(): CreditScore {

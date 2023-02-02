@@ -3,7 +3,7 @@ package hristostefanov.creditscoredemo.core.business
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
 import javax.inject.Inject
 
-class ReportCreditScoreProgressInteractorImpl @Inject constructor(
+internal class ReportCreditScoreProgressInteractorImpl @Inject constructor(
     private val creditScoreRepository: CreditScoreRepository
 ) : ReportCreditScoreProgressInteractor {
     @Throws(DataAccessException::class)

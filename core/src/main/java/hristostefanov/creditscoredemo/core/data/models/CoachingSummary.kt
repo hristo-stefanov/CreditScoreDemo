@@ -3,7 +3,7 @@ package hristostefanov.creditscoredemo.core.data.models
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class CoachingSummary(
+internal data class CoachingSummary(
     val activeChat: Boolean = false,
     val activeTodo: Boolean = false,
     val numberOfCompletedTodoItems: Int = 0,

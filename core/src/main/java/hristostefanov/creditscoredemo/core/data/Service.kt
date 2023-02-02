@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import java.io.IOException
 
 @AnyThread // The implementation must be main-safe.
-interface Service {
+internal interface Service {
     @Throws(HttpException::class, IOException::class)
     @GET("/endpoint.json")
     suspend fun getResponse(): Response

@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.ui
+package hristostefanov.creditscoredemo
 
 import android.os.Build
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
@@ -15,6 +15,7 @@ import androidx.test.filters.LargeTest
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
+import hristostefanov.creditscoredemo.common.Registry
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Rule
@@ -23,7 +24,6 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import hristostefanov.creditscoredemo.core.Config as UtilConfig
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
@@ -75,7 +75,7 @@ class MainActivityTest {
         mockWebServer.start()
 
         val baseURL = mockWebServer.url("/")
-        UtilConfig.SERVICE_BASE_URL = baseURL.toString()
+        Registry.SERVICE_BASE_URL = baseURL.toString()
     }
 
     private fun stopMockWebServer() {

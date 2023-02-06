@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hristostefanov.creditscoredemo.common.Registry
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
@@ -27,7 +28,7 @@ internal abstract class NetworkModule {
                 .add(KotlinJsonAdapterFactory())
                 .build()
             return Retrofit.Builder()
-                .baseUrl(Config.SERVICE_BASE_URL)
+                .baseUrl(Registry.SERVICE_BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
         }

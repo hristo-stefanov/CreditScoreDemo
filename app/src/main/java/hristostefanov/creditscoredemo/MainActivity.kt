@@ -1,8 +1,9 @@
-package hristostefanov.creditscoredemo.ui
+package hristostefanov.creditscoredemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
+import hristostefanov.creditscoredemo.ui.MainScreen
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @AndroidEntryPoint

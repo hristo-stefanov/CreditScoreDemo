@@ -16,3 +16,4 @@ rootProject.name = "CreditScoreDemo"
 include ':app'
 include ':ui'
 include ':core'
+include ':common'

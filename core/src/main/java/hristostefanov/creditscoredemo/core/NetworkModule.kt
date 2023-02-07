@@ -15,31 +15,34 @@ import hristostefanov.creditscoredemo.core.data.CreditScoreRepositoryImpl
 import hristostefanov.creditscoredemo.core.data.Service
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
 
 @Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
 internal abstract class NetworkModule {
     companion object {
+        @Singleton
         @Provides
-        fun provideRetrofit(): Retrofit {
+        fun provideService(): Service {
             val moshi = Moshi.Builder()
                 // handles Kotlin nullability
                 .add(KotlinJsonAdapterFactory())
                 .build()
-            return Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .baseUrl(Registry.SERVICE_BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
-        }
 
-        @Provides
-        fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
+            return retrofit.create(Service::class.java)
+        }
     }
 
+    @Singleton
     @Binds
     abstract fun bindCreditScoreRepository(impl: CreditScoreRepositoryImpl): CreditScoreRepository
 
+    @Singleton
     @Binds
     abstract fun bindReportCreditScoreProgressInteractor(impl: ReportCreditScoreProgressInteractorImpl)
             : ReportCreditScoreProgressInteractor

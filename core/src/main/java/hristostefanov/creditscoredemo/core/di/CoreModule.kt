@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.core
+package hristostefanov.creditscoredemo.core.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 @Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class NetworkModule {
+internal abstract class CoreModule {
     companion object {
         @Singleton
         @Provides

@@ -2,4 +2,5 @@
 <resources>
     <string name="yourCreditScoreIs">Your credit score is</string>
     <string name="retry">Retry</string>
+    <string name="outOf">out of %1s</string>
 </resources>

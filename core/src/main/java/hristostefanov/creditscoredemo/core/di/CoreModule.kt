@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import hristostefanov.creditscoredemo.common.Registry
+import hristostefanov.creditscoredemo.common.BaseUrl
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractor
 import hristostefanov.creditscoredemo.core.business.ReportCreditScoreProgressInteractorImpl
 import hristostefanov.creditscoredemo.core.business.dependencies.CreditScoreRepository
@@ -24,13 +24,16 @@ internal abstract class CoreModule {
     companion object {
         @Singleton
         @Provides
-        fun provideService(): Service {
+        fun provideService(
+            @BaseUrl
+            baseUrl: String
+        ): Service {
             val moshi = Moshi.Builder()
                 // handles Kotlin nullability
                 .add(KotlinJsonAdapterFactory())
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(Registry.SERVICE_BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
 

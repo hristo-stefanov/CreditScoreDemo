@@ -15,7 +15,6 @@ import androidx.test.filters.LargeTest
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
-import hristostefanov.creditscoredemo.common.Registry
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Rule
@@ -24,12 +23,14 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
+import javax.inject.Inject
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O], application = HiltTestApplication::class)
 class MainActivityTest {
-    private val mockWebServer = MockWebServer()
+    @Inject
+    internal lateinit var mockWebServer: MockWebServer
 
     @get:Rule(order = 0)
     internal val hiltRule = HiltAndroidRule(this)
@@ -37,6 +38,9 @@ class MainActivityTest {
     @get:Rule(order = 1)
     val mockWebServerRule = object : TestWatcher() {
         override fun starting(description: Description) {
+            // needed for field injection in the test class
+            hiltRule.inject()
+
             startMockWebServer()
         }
 
@@ -73,9 +77,6 @@ class MainActivityTest {
         mockWebServer.enqueue(MockResponse().setBody(response))
 
         mockWebServer.start()
-
-        val baseURL = mockWebServer.url("/")
-        Registry.SERVICE_BASE_URL = baseURL.toString()
     }
 
     private fun stopMockWebServer() {

@@ -4,7 +4,6 @@ import androidx.compose.material.Surface
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
-import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import org.junit.Rule
 import org.junit.Test
 

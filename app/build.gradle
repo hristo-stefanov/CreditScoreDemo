@@ -55,16 +55,8 @@ dependencies {
     implementation implementation(project(':ui'))
     implementation implementation(project(':common'))
 
-    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'com.google.android.material:material:1.7.0'
 
-    def lifecycleVersion = '2.6.0-alpha04'
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-
-    // Compose integration
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
     implementation 'androidx.activity:activity-compose:1.6.1'
 
     // Compose
@@ -79,17 +71,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
 
-    // explicitly referenced for keeping up with security updates
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
-
-
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.assertj:assertj-core:3.20.2"
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
 
     testImplementation 'androidx.test.ext:junit:1.1.5'
@@ -106,7 +88,6 @@ dependencies {
 
     // Needed for createComposeRule, but not createAndroidComposeRule:
 //    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
-
 }
 
 kapt {

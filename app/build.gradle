@@ -52,6 +52,8 @@ android {
 }
 
 dependencies {
+    lintChecks("com.slack.lint.compose:compose-lint-checks:1.0.0")
+
     implementation implementation(project(':ui'))
     implementation implementation(project(':common'))
 

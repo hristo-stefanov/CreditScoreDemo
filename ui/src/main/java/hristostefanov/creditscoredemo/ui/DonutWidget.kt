@@ -1,4 +1,4 @@
-package hristostefanov.creditscoredemo.ui.donut
+package hristostefanov.creditscoredemo.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border

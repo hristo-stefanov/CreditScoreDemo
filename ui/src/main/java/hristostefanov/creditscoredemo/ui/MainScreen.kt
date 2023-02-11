@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import hristostefanov.creditscoredemo.ui.donut.DonutWidget
 import hristostefanov.creditscoredemo.ui.theme.CreditScoreDemoTheme
 
 @Composable
